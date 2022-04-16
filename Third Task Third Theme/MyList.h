@@ -12,6 +12,13 @@ enum MyEnum
 
 namespace MYLIST
 {
+	/* Узловой элемент списка */
+	struct Node
+	{
+		int data = 0;
+		int next_ptr = NULL;
+	};
+
 	/* Сама структура */
 	struct my_List
 	{
@@ -43,28 +50,28 @@ namespace MYLIST
 	/// <returns>Возвращает булевую переменую - пуст ли список</returns>
 	bool empty(my_List& m_l);
 
+
 	/// <summary>
 	/// Функция поиска заданного элемента
 	/// </summary>
-	/// <param name="m_l">Получает ссылку на список<</param>
+	/// <param name="m_l">Получает ссылку на список</param>
 	/// <param name="find_data">Получает элемент, который надо найти</param>
-	/// <param name="fcn">Получает функцию, по какому критерию нужно искать</param>
 	/// <returns>Возвращает индекс найденного элемента</returns>
-	int find_v2(my_List& m_l, int find_data, const std::function<bool(int, int)>& fcn);
+	int find_v2(my_List& m_l, int find_data);
 
 	/// <summary>
 	/// Функция добавления нового элемента
 	/// </summary>
 	/// <param name="m_l">Получает ссылку на список</param>
-	/// <param name="data">Получает данные, которые нужно добавить</param>
-	/// <param name="fcn">Получает функцию, по какому критерию нужно искать</param>
-	void add(my_List& m_l, int data, const std::function<bool(int, int)>& fcn);
+	/// <param name="data">Вставляемые данные</param>
+	/// <param name="find_data">Ищет расположение элемента с такими данными</param>
+	/// <param name="after">Отвечает за расположение нового элемента до/после заданного</param>
+	void add(my_List& m_l, int data, int find_data, bool after);
 
 	/// <summary>
 	/// Функция удаления элемента
 	/// </summary>
 	/// <param name="m_l"></param>
 	/// <param name="data">Получает данные, которые нужно удалить</param>
-	void remove(my_List& m_l, int data);
+	void remove(my_List& m_l, int find_data);
 }
-

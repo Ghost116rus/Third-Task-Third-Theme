@@ -1,18 +1,17 @@
 #pragma once
 #include <iostream>
-#include "Node.h"
 
-// В общем, я хз, что-то запутался - сейчас буду по другому делать
+const int Array_Size = 8;
 
 namespace Queue
 {
 	struct queue
 	{
-		Node* fixed_array[Array_Size-1]{};
-		Node** first_ptr;
-		Node** last_ptr;
+		int fixed_array[Array_Size-1]{};
+		int* first_ptr;
+		int* last_ptr;
 
-		Node** start_of_arr;
+		int* start_of_arr;
 		int count;
 	};
 
@@ -26,11 +25,11 @@ namespace Queue
 	bool full(queue& q_ref);
 
 	/* добавление элемента в конец очереди */
-	void add(queue& q_ref, Node* node);
+	void add(queue& q_ref, int data);
 
 	/* удаление первого элемента */
-	Node* pop(queue& q_ref);
+	int pop(queue& q_ref);
 
 	/* функция вывода очереди на экран*/
-	//void show(queue& q_ref);
+	void show(queue& q_ref);
 }

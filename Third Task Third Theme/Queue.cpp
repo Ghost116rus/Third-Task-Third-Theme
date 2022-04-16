@@ -22,37 +22,37 @@ bool Queue::full(queue& q_ref)
 	return (q_ref.count == 5);
 }
 
-void Queue::add(queue& q_ref, Node*  node)
+void Queue::add(queue& q_ref, int data)
 {
 	if (full(q_ref))
 	{
-		std::cout << "Список пуст!\n";
+		std::cout << "Очередь переполнена!\n";
 		return;
 	}
 
 
 	if (((q_ref.last_ptr + 1) - q_ref.start_of_arr) < 5)
 	{
-		*(q_ref.last_ptr++) = node;
+		*(q_ref.last_ptr++) = data;
 	}
 	else
 	{
-		*q_ref.last_ptr = node;
+		*q_ref.last_ptr = data;
 		q_ref.last_ptr = q_ref.start_of_arr;
 	}
 	q_ref.count++;
-	//std::cout << "Добавление выполнено успешно.\n";
+	std::cout << "Добавление выполнено успешно.\n";
 }
 
-Node* Queue::pop(queue& q_ref)
+int Queue::pop(queue& q_ref)
 {
 	if (empty(q_ref))
 	{
-		std::cout << "Список переполнен!\n";
-		return;
+		std::cout << "Очередь пустая!\n";
+		return -1;
 	}
 
-	Node* temp = *q_ref.first_ptr;
+	int temp = *q_ref.first_ptr;
 	q_ref.first_ptr = q_ref.start_of_arr + ((q_ref.first_ptr + 1 - q_ref.start_of_arr) % 5);
 	q_ref.count--;
 
@@ -60,7 +60,6 @@ Node* Queue::pop(queue& q_ref)
 	//std::cout << "Удаление выполнено успешно.\n";
 }
 
-/*
 void Queue::show(queue& q_ref)
 {
 	if (empty(q_ref))
@@ -69,8 +68,8 @@ void Queue::show(queue& q_ref)
 		return;
 	}
 
-	MYLIST::Node* temp_f = q_ref.first_ptr;
-	MYLIST::Node* temp_b = q_ref.start_of_arr;
+	int* temp_f = q_ref.first_ptr;
+	int* temp_b = q_ref.start_of_arr;
 
 	int i = 1;
 
@@ -80,4 +79,3 @@ void Queue::show(queue& q_ref)
 		temp_f = temp_b + (temp_f + 1 - temp_b) % 5;
 	}
 }
-*/

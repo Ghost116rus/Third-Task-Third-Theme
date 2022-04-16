@@ -35,8 +35,5 @@
     <ClInclude Include="Queue.h">
       <Filter>Вспомогательный элемент</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Вспомогательный элемент</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
