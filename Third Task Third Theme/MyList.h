@@ -28,7 +28,7 @@ namespace MYLIST
 	};
 
 	/* Функция инициализации */
-	void create(my_List& ml);
+	void init(my_List& ml);
 
 	/// <summary>
 	/// Функция вывода списка на экра

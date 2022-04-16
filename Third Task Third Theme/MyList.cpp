@@ -1,7 +1,7 @@
 #include "MyList.h"
 
 
-void MYLIST::create(my_List& ml)
+void MYLIST::init(my_List& ml)
 {
 	// ƒл€ первой €чейки делаем уникальные данные
 	ml.fix_arr[0].data = -1;
@@ -114,6 +114,7 @@ void MYLIST::remove(my_List& m_l, int find_data)
 		m_l.fix_arr[current_i].next_ptr = m_l.fix_arr[temp].next_ptr;
 		m_l.fix_arr[temp].next_ptr = 0;
 
+		Queue::add(m_l.free_array_cells, temp);
 		m_l.count--; std::cout << "”даление выполнено успешно\n";
 	}
 	else

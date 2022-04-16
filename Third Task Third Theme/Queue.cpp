@@ -19,7 +19,7 @@ bool Queue::empty(queue& q_ref)
 
 bool Queue::full(queue& q_ref)
 {
-	return (q_ref.count == 5);
+	return (q_ref.count == Array_Size-1);
 }
 
 void Queue::add(queue& q_ref, int data)
@@ -31,7 +31,7 @@ void Queue::add(queue& q_ref, int data)
 	}
 
 
-	if (((q_ref.last_ptr + 1) - q_ref.start_of_arr) < 5)
+	if (((q_ref.last_ptr + 1) - q_ref.start_of_arr) < (Array_Size-1))
 	{
 		*(q_ref.last_ptr++) = data;
 	}
@@ -41,7 +41,7 @@ void Queue::add(queue& q_ref, int data)
 		q_ref.last_ptr = q_ref.start_of_arr;
 	}
 	q_ref.count++;
-	std::cout << "Добавление выполнено успешно.\n";
+	//std::cout << "Добавление выполнено успешно.\n";
 }
 
 int Queue::pop(queue& q_ref)
@@ -53,7 +53,8 @@ int Queue::pop(queue& q_ref)
 	}
 
 	int temp = *q_ref.first_ptr;
-	q_ref.first_ptr = q_ref.start_of_arr + ((q_ref.first_ptr + 1 - q_ref.start_of_arr) % 5);
+	*q_ref.first_ptr = 0;
+	q_ref.first_ptr = q_ref.start_of_arr + ((q_ref.first_ptr + 1 - q_ref.start_of_arr) % (Array_Size-1));
 	q_ref.count--;
 
 	return temp;
@@ -76,6 +77,6 @@ void Queue::show(queue& q_ref)
 	while (i != q_ref.count + 1)
 	{
 		std::cout << i++ << "-й\tэлемент очереди\t" << "данные:" << *temp_f << std::endl;
-		temp_f = temp_b + (temp_f + 1 - temp_b) % 5;
+		temp_f = temp_b + (temp_f + 1 - temp_b) % (Array_Size-1);
 	}
 }
