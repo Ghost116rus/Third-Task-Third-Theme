@@ -60,6 +60,14 @@ namespace MYLIST
 	int find_v2(my_List& m_l, int find_data);
 
 	/// <summary>
+	/// Функция добавления нового элемента в начало
+	/// </summary>
+	/// <param name="m_l">Получает ссылку на список</param>
+	/// <param name="find_data">Вставляемые данные</param>
+	void push_front(my_List& m_l, int data);
+
+
+	/// <summary>
 	/// Функция добавления нового элемента
 	/// </summary>
 	/// <param name="m_l">Получает ссылку на список</param>

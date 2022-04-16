@@ -142,8 +142,10 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyList.cpp" />
     <ClCompile Include="Queue.cpp" />
+    <ClCompile Include="User_interface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="User_interface.h" />
     <ClInclude Include="MyList.h" />
     <ClInclude Include="Queue.h" />
   </ItemGroup>

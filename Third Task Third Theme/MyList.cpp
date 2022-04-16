@@ -58,7 +58,7 @@ int MYLIST::find_v2(my_List& m_l, int find_data)
 	return Not_found;
 }
 
-void MYLIST::add(my_List& m_l, int data, int find_data, bool after)
+void MYLIST::push_front(my_List& m_l, int data)
 {
 	if (MYLIST::empty(m_l))
 	{
@@ -68,7 +68,20 @@ void MYLIST::add(my_List& m_l, int data, int find_data, bool after)
 		m_l.count++; std::cout << "Добавление выполнено успешно\n";
 		return;
 	}
-	else if (MYLIST::full(m_l))
+}
+
+void MYLIST::add(my_List& m_l, int data, int find_data, bool after)
+{
+	/*if (MYLIST::empty(m_l))
+	{
+		m_l.fix_arr[0].next_ptr = Queue::pop(m_l.free_array_cells);
+		m_l.fix_arr[m_l.fix_arr[0].next_ptr].data = data;
+
+		m_l.count++; std::cout << "Добавление выполнено успешно\n";
+		return;
+	}*/
+
+	if (MYLIST::full(m_l))
 	{
 		std::cout << "Список переполнен!\n";
 	}
