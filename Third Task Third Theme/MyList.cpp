@@ -75,10 +75,7 @@ void MYLIST::add(my_List& m_l, int data, int find_data, bool after)
 {
 	/*if (MYLIST::empty(m_l))
 	{
-		m_l.fix_arr[0].next_ptr = Queue::pop(m_l.free_array_cells);
-		m_l.fix_arr[m_l.fix_arr[0].next_ptr].data = data;
-
-		m_l.count++; std::cout << "Добавление выполнено успешно\n";
+		push_front(m_l, data);
 		return;
 	}*/
 
