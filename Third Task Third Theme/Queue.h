@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Node.h"
 
-
+// В общем, я хз, что-то запутался - сейчас буду по другому делать
 
 namespace Queue
 {
