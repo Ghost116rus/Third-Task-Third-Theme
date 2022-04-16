@@ -45,6 +45,7 @@ bool MYLIST::empty(my_List& m_l)
 
 int MYLIST::find_v2(my_List& m_l, int find_data)
 {
+	// из-за того, что я возвращаю указатель на элемент, стоящий до того, который я ищу, пришлось использовать do
 	int current = 0;
 	do
 	{
@@ -92,6 +93,7 @@ void MYLIST::add(my_List& m_l, int data, int find_data, bool after)
 	{
 		if (after)
 		{
+			// В случае, если нужно вставить после искомого, мы сразу берем следующий индекс
 			current_i = m_l.fix_arr[current_i].next_ptr;
 		}
 
