@@ -1,21 +1,24 @@
 #include "MyList.h"
 
+using namespace MYLIST;
 
-void MYLIST::init(my_List& ml)
+void MYLIST::init(my_List& ml, Node& stack)
 {
 	// Для первой ячейки делаем уникальные данные
 	ml.fix_arr[0].data = -1;
 	ml.fix_arr[0].next_ptr = NULL;
 	
-	/* Инициализируем очередь */
-	Queue::init(ml.free_array_cells);
+	///* Инициализируем очередь */
+	//Queue::init(ml.free_array_cells);
+	stack.next_ptr = 8;
 
 	// Заносим все свободные ячейки в очередь
 	for (size_t i = 1; i < Array_Size; i++)
 	{
-		Queue::add(ml.free_array_cells, i);
+		
+		//Queue::add(ml.free_array_cells, i);
 		ml.fix_arr[i].data = 0;
-		ml.fix_arr[i].next_ptr = NULL;
+		ml.fix_arr[i].next_ptr = i-1;
 	}
 }
 
@@ -59,19 +62,39 @@ int MYLIST::find_v2(my_List& m_l, int find_data)
 	return Not_found;
 }
 
-void MYLIST::push_front(my_List& m_l, int data)
+int pop(my_List& m_l, MYLIST::Node& stack)
+{
+	int current = stack.next_ptr;
+	stack.next_ptr = m_l.fix_arr[current].next_ptr;
+
+	return current;
+}
+
+void addS(my_List& m_l, MYLIST::Node& stack, int index)
+{
+	m_l.fix_arr[index].next_ptr = stack.next_ptr;
+	stack.next_ptr = index;
+}
+
+
+void MYLIST::push_front(my_List& m_l, int data, Node& stack)
 {
 	if (MYLIST::empty(m_l))
 	{
-		m_l.fix_arr[0].next_ptr = Queue::pop(m_l.free_array_cells);
+		int temp = m_l.fix_arr[0].next_ptr;
+		m_l.fix_arr[0].next_ptr = pop(m_l, stack);
 		m_l.fix_arr[m_l.fix_arr[0].next_ptr].data = data;
+		m_l.fix_arr[m_l.fix_arr[0].next_ptr].next_ptr = temp;
 
 		m_l.count++; std::cout << "Добавление выполнено успешно\n";
 		return;
 	}
 }
 
-void MYLIST::add(my_List& m_l, int data, int find_data, bool after)
+
+
+
+void MYLIST::add(my_List& m_l, int data, int find_data, bool after, Node& stack)
 {
 	/*if (MYLIST::empty(m_l))
 	{
@@ -95,7 +118,7 @@ void MYLIST::add(my_List& m_l, int data, int find_data, bool after)
 		}
 
 		int temp_i = m_l.fix_arr[current_i].next_ptr;
-		m_l.fix_arr[current_i].next_ptr = Queue::pop(m_l.free_array_cells);
+		m_l.fix_arr[current_i].next_ptr = pop(m_l, stack);
 
 		m_l.fix_arr[m_l.fix_arr[current_i].next_ptr].next_ptr = temp_i;
 		m_l.fix_arr[m_l.fix_arr[current_i].next_ptr].data = data;
@@ -108,7 +131,7 @@ void MYLIST::add(my_List& m_l, int data, int find_data, bool after)
 	}
 }
 
-void MYLIST::remove(my_List& m_l, int find_data)
+void MYLIST::remove(my_List& m_l, int find_data, Node& stack)
 {
 	if (MYLIST::empty(m_l))
 	{
@@ -126,7 +149,7 @@ void MYLIST::remove(my_List& m_l, int find_data)
 		m_l.fix_arr[current_i].next_ptr = m_l.fix_arr[temp].next_ptr;
 		m_l.fix_arr[temp].next_ptr = 0;
 
-		Queue::add(m_l.free_array_cells, temp);
+		addS(m_l, stack, temp);
 		m_l.count--; std::cout << "Удаление выполнено успешно\n";
 	}
 	else

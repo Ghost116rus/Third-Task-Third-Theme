@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <functional>
-#include "Queue.h"
+//#include "Queue.h"
+
 
 enum MyEnum
 {
@@ -9,6 +10,7 @@ enum MyEnum
 	Find_el,
 };
 
+const int Array_Size = 9;
 
 namespace MYLIST
 {
@@ -19,16 +21,21 @@ namespace MYLIST
 		int next_ptr = NULL;
 	};
 
+	struct Stack
+	{
+		int next_ptr = NULL;
+	};
+
 	/* Сама структура */
 	struct my_List
 	{
 		int count = 1;					// Количество элементов в массиве
-		Node fix_arr[Array_Size+1];		// Сам массив
-		Queue::queue free_array_cells;  // Очередь свободных ячеек массива
+		Node fix_arr[Array_Size];		// Сам массив
+		//Queue::queue free_array_cells;  // Очередь свободных ячеек массива
 	};
 
 	/* Функция инициализации */
-	void init(my_List& ml);
+	void init(my_List& ml, Node& stack);
 
 	/// <summary>
 	/// Функция вывода списка на экра
@@ -64,7 +71,7 @@ namespace MYLIST
 	/// </summary>
 	/// <param name="m_l">Получает ссылку на список</param>
 	/// <param name="find_data">Вставляемые данные</param>
-	void push_front(my_List& m_l, int data);
+	void push_front(my_List& m_l, int data, Node& stack);
 
 
 	/// <summary>
@@ -74,12 +81,12 @@ namespace MYLIST
 	/// <param name="data">Вставляемые данные</param>
 	/// <param name="find_data">Ищет расположение элемента с такими данными</param>
 	/// <param name="after">Отвечает за расположение нового элемента до/после заданного</param>
-	void add(my_List& m_l, int data, int find_data, bool after);
+	void add(my_List& m_l, int data, int find_data, bool after, Node& stack);
 
 	/// <summary>
 	/// Функция удаления элемента
 	/// </summary>
 	/// <param name="m_l"></param>
 	/// <param name="data">Получает данные, которые нужно удалить</param>
-	void remove(my_List& m_l, int find_data);
+	void remove(my_List& m_l, int find_data, Node& stack);
 }
