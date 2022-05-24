@@ -2,7 +2,7 @@
 
 using namespace MYLIST;
 
-void MYLIST::init(my_List& ml, Node& stack)
+void MYLIST::init(my_List& ml, int& head)
 {
 	// ƒл€ первой €чейки делаем уникальные данные
 	ml.fix_arr[0].data = -1;
@@ -10,7 +10,8 @@ void MYLIST::init(my_List& ml, Node& stack)
 	
 	///* »нициализируем очередь */
 	//Queue::init(ml.free_array_cells);
-	stack.next_ptr = 8;
+	//stack.next_ptr = Array_Size-1;
+	head = Array_Size - 1;
 
 	// «аносим все свободные €чейки в очередь
 	for (size_t i = 1; i < Array_Size; i++)
@@ -24,6 +25,11 @@ void MYLIST::init(my_List& ml, Node& stack)
 
 void MYLIST::show(my_List& m_l)
 {
+	if (!(m_l.count-1))
+	{
+		std::cout << "—писок пустой\n"; return;
+	}
+
 	int i = 1;
 	int current = m_l.fix_arr[0].next_ptr;
 
@@ -62,27 +68,27 @@ int MYLIST::find_v2(my_List& m_l, int find_data)
 	return Not_found;
 }
 
-int pop(my_List& m_l, MYLIST::Node& stack)
+int pop(my_List& m_l, int& head)
 {
-	int current = stack.next_ptr;
-	stack.next_ptr = m_l.fix_arr[current].next_ptr;
+	int current = head;
+	head = m_l.fix_arr[current].next_ptr;
 
 	return current;
 }
 
-void addS(my_List& m_l, MYLIST::Node& stack, int index)
+void addS(my_List& m_l, int& head, int index)
 {
-	m_l.fix_arr[index].next_ptr = stack.next_ptr;
-	stack.next_ptr = index;
+	m_l.fix_arr[index].next_ptr = head;
+	head = index;
 }
 
 
-void MYLIST::push_front(my_List& m_l, int data, Node& stack)
+void MYLIST::push_front(my_List& m_l, int data, int& head)
 {
 	if (MYLIST::empty(m_l))
 	{
 		int temp = m_l.fix_arr[0].next_ptr;
-		m_l.fix_arr[0].next_ptr = pop(m_l, stack);
+		m_l.fix_arr[0].next_ptr = pop(m_l, head);
 		m_l.fix_arr[m_l.fix_arr[0].next_ptr].data = data;
 		m_l.fix_arr[m_l.fix_arr[0].next_ptr].next_ptr = temp;
 
@@ -94,7 +100,7 @@ void MYLIST::push_front(my_List& m_l, int data, Node& stack)
 
 
 
-void MYLIST::add(my_List& m_l, int data, int find_data, bool after, Node& stack)
+void MYLIST::add(my_List& m_l, int data, int find_data, bool after, int& head)
 {
 	/*if (MYLIST::empty(m_l))
 	{
@@ -118,7 +124,7 @@ void MYLIST::add(my_List& m_l, int data, int find_data, bool after, Node& stack)
 		}
 
 		int temp_i = m_l.fix_arr[current_i].next_ptr;
-		m_l.fix_arr[current_i].next_ptr = pop(m_l, stack);
+		m_l.fix_arr[current_i].next_ptr = pop(m_l, head);
 
 		m_l.fix_arr[m_l.fix_arr[current_i].next_ptr].next_ptr = temp_i;
 		m_l.fix_arr[m_l.fix_arr[current_i].next_ptr].data = data;
@@ -131,7 +137,7 @@ void MYLIST::add(my_List& m_l, int data, int find_data, bool after, Node& stack)
 	}
 }
 
-void MYLIST::remove(my_List& m_l, int find_data, Node& stack)
+void MYLIST::remove(my_List& m_l, int find_data, int& head)
 {
 	if (MYLIST::empty(m_l))
 	{
@@ -149,7 +155,7 @@ void MYLIST::remove(my_List& m_l, int find_data, Node& stack)
 		m_l.fix_arr[current_i].next_ptr = m_l.fix_arr[temp].next_ptr;
 		m_l.fix_arr[temp].next_ptr = 0;
 
-		addS(m_l, stack, temp);
+		addS(m_l, head, temp);
 		m_l.count--; std::cout << "”даление выполнено успешно\n";
 	}
 	else

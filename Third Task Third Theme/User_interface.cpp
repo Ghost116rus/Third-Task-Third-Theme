@@ -74,7 +74,7 @@ void menu(MYLIST::my_List& my_list)
 {
 	int user_choice = 0;
 	bool complete_init = false;
-	MYLIST::Node stack;
+	int head;
 
 
 	show_main_menu();
@@ -91,7 +91,7 @@ void menu(MYLIST::my_List& my_list)
 
 			if (!complete_init)
 			{
-				MYLIST::init(my_list, stack); std::cout << "Cписок инициализирован.\n";
+				MYLIST::init(my_list, head); std::cout << "Cписок инициализирован.\n";
 				complete_init = true;
 			}
 			else
@@ -111,7 +111,7 @@ void menu(MYLIST::my_List& my_list)
 
 					if ((MYLIST::empty(my_list)))
 					{
-						MYLIST::push_front(my_list, temp_data, stack);
+						MYLIST::push_front(my_list, temp_data, head);
 					}
 					else
 					{
@@ -121,7 +121,7 @@ void menu(MYLIST::my_List& my_list)
 						std::cout << "Вы хотите вставить данные до заданного элемента или после? 0 - до, 1 - после\n Введите: ";
 						int after = getValue(O_Or_1, "Вы хотите вставить данные до заданного элемента или после? 0 - до, 1 - после\n Введите: ");
 
-						MYLIST::add(my_list, temp_data, find_data, after, stack);
+						MYLIST::add(my_list, temp_data, find_data, after, head);
 					}
 					
 				}
@@ -150,7 +150,7 @@ void menu(MYLIST::my_List& my_list)
 				{
 					std::cout << "Введите данные, которые хотели бы удалить: ";
 					temp_data = getValue(1, "Введите данные: ");
-					MYLIST::remove(my_list, temp_data, stack);
+					MYLIST::remove(my_list, temp_data, head);
 				}
 
 			}

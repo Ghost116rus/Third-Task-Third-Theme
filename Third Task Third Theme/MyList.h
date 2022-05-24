@@ -20,12 +20,7 @@ namespace MYLIST
 		int data = 0;
 		int next_ptr = NULL;
 	};
-
-	struct Stack
-	{
-		int next_ptr = NULL;
-	};
-
+	
 	/* Сама структура */
 	struct my_List
 	{
@@ -35,7 +30,7 @@ namespace MYLIST
 	};
 
 	/* Функция инициализации */
-	void init(my_List& ml, Node& stack);
+	void init(my_List& ml, int& head);
 
 	/// <summary>
 	/// Функция вывода списка на экра
@@ -71,7 +66,7 @@ namespace MYLIST
 	/// </summary>
 	/// <param name="m_l">Получает ссылку на список</param>
 	/// <param name="find_data">Вставляемые данные</param>
-	void push_front(my_List& m_l, int data, Node& stack);
+	void push_front(my_List& m_l, int data, int& head);
 
 
 	/// <summary>
@@ -81,12 +76,12 @@ namespace MYLIST
 	/// <param name="data">Вставляемые данные</param>
 	/// <param name="find_data">Ищет расположение элемента с такими данными</param>
 	/// <param name="after">Отвечает за расположение нового элемента до/после заданного</param>
-	void add(my_List& m_l, int data, int find_data, bool after, Node& stack);
+	void add(my_List& m_l, int data, int find_data, bool after, int& head);
 
 	/// <summary>
 	/// Функция удаления элемента
 	/// </summary>
 	/// <param name="m_l"></param>
 	/// <param name="data">Получает данные, которые нужно удалить</param>
-	void remove(my_List& m_l, int find_data, Node& stack);
+	void remove(my_List& m_l, int find_data, int& head);
 }
